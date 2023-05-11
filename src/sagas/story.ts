@@ -22,9 +22,9 @@ export function* nextStorySaga(): Generator<any, void, any> {
     const data = yield call([response, response.json]);
     const question = data.choices[0].message.content as string;
 
-    question.replaceAll('\n', '<br>');
+    const formattedQuestion = yield call(() => question.replace(/\n/g, ' <br> '));
 
-    yield put(nextStorySuccess(question));
+    yield put(nextStorySuccess(formattedQuestion));
   } catch (error) {
     console.log(error);
   }
