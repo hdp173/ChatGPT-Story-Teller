@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { uuid } from '@gilbarbara/helpers/lib';
 import styled from 'styled-components';
 
 interface Props {
@@ -53,10 +52,10 @@ function Subtitle(props: Props) {
     <Paragraph>
       {children.split(' ').map((word, index) =>
         word === '<br>' ? (
-          <br key={uuid()} />
+          <br key={index} />
         ) : (
           <Word
-            key={uuid()}
+            key={index}
             style={{
               animation: `fade-in 0.8s ${
                 (index + 1) * 0.2
