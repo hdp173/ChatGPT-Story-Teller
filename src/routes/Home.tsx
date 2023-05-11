@@ -5,7 +5,7 @@ import { Button, Container, Text } from 'styled-minimal';
 
 import { STATUS } from 'literals';
 
-import { nextStory } from 'actions';
+import { clearStory, nextStory } from 'actions';
 
 import Background from 'components/Background';
 import Icon from 'components/Icon';
@@ -67,6 +67,12 @@ function Home() {
     }
   };
 
+  const handleClickClear = () => {
+    dispatch(clearStory());
+    switchBackground();
+    dispatch(nextStory());
+  };
+
   return (
     <Background key="Home" data-testid="Home" itemID={backgroundImage}>
       {isRunning ? (
@@ -75,6 +81,20 @@ function Home() {
         </Container>
       ) : (
         <Container fullScreen>
+          <Button
+            busy={status === STATUS.RUNNING}
+            data-testid="Clear"
+            mb={5}
+            onClick={handleClickClear}
+            size="xl"
+            style={{ position: 'absolute', right: '80px', bottom: '80px' }}
+            textTransform="uppercase"
+            type="submit"
+            variant="info"
+          >
+            <Text mr={2}>Clear</Text>
+            <Icon name="bolt" />
+          </Button>
           {/* <Title display={setTitleDisplayed}>Welcome to our world</Title> */}
           <Subtitle display={setSubtitleDisplayed}>{formattedQuestion}</Subtitle>
 
@@ -82,6 +102,7 @@ function Home() {
             style={{ visibility: subtitleDisplayed ? 'visible' : 'hidden', textAlign: 'center' }}
           >
             <Input
+              autoComplete="off"
               name="answer"
               onChange={event => {
                 setAnswer(event.target.value);
