@@ -8,6 +8,7 @@ import { StoryState } from 'types';
 
 export const storyState = {
   question: null,
+  title: null,
   messages: [
     {
       role: 'system',
@@ -20,7 +21,7 @@ export const storyState = {
     },
     {
       role: 'user',
-      content: `Now ask me one by one don't say yes or sure at first. Just start with greetings.`,
+      content: `Now ask me one by one but don't say yes or sure at first. Just start with greetings.`,
     },
   ],
   status: STATUS.IDLE,
@@ -41,7 +42,10 @@ export default {
         draft.status = STATUS.RUNNING;
       })
       .addCase(nextStorySuccess, (draft, { payload }) => {
-        draft.question = !payload ? null : payload;
+        const { question, title } = payload;
+
+        draft.title = !title ? null : title;
+        draft.question = !question ? null : question;
         draft.status = STATUS.READY;
       });
   }),

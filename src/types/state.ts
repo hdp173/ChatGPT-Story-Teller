@@ -48,6 +48,7 @@ export interface StoryState {
   messages: MessageData[];
   question: string | null;
   status: ValueOf<Status>;
+  title: string | null;
 }
 
 export interface RootState {

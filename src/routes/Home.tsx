@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Button, Container, Text } from 'styled-minimal';
@@ -11,8 +11,8 @@ import Background from 'components/Background';
 import Icon from 'components/Icon';
 import Loading from 'components/Loading';
 import Subtitle from 'components/Subtitle';
+import Title from 'components/Title';
 
-// import Title from 'components/Title';
 import { RootState } from 'types';
 
 const Input = styled.input`
@@ -41,11 +41,11 @@ function Home() {
   const dispatch = useDispatch();
   const status = useSelector<RootState>(({ story }) => story.status);
   const question = useSelector<RootState>(({ story }) => story.question) as string | null;
-  const formattedQuestion = useMemo(() => (!question ? '' : question), [question]);
+  const title = useSelector<RootState>(({ story }) => story.title) as string | null;
   const isRunning = status === STATUS.RUNNING;
 
   const [backgroundImage, setBackgroundImage] = useState('1');
-  // const [titleDisplayed, setTitleDisplayed] = useState(false);
+  const [titleDisplayed, setTitleDisplayed] = useState(false);
   const [subtitleDisplayed, setSubtitleDisplayed] = useState(false);
   const [answer, setAnswer] = useState('');
   // const answerRef = useRef(null);
@@ -95,37 +95,44 @@ function Home() {
             <Text mr={2}>Clear</Text>
             <Icon name="bolt" />
           </Button>
-          {/* <Title display={setTitleDisplayed}>Welcome to our world</Title> */}
-          <Subtitle display={setSubtitleDisplayed}>{formattedQuestion}</Subtitle>
+          <Title display={setTitleDisplayed}>{title || ''}</Title>
+          {titleDisplayed && (
+            <>
+              <Subtitle display={setSubtitleDisplayed}>{question || ''}</Subtitle>
 
-          <div
-            style={{ visibility: subtitleDisplayed ? 'visible' : 'hidden', textAlign: 'center' }}
-          >
-            <Input
-              autoComplete="off"
-              name="answer"
-              onChange={event => {
-                setAnswer(event.target.value);
-              }}
-              placeholder="Enter your answer here"
-              required
-              type="text"
-              value={answer}
-            />
-            <Button
-              busy={status === STATUS.RUNNING}
-              data-testid="Login"
-              mb={5}
-              onClick={handleClickNext}
-              size="xl"
-              textTransform="uppercase"
-              type="submit"
-              variant="success"
-            >
-              <Text mr={2}>Next</Text>
-              <Icon name="check" />
-            </Button>
-          </div>
+              <div
+                style={{
+                  visibility: subtitleDisplayed ? 'visible' : 'hidden',
+                  textAlign: 'center',
+                }}
+              >
+                <Input
+                  autoComplete="off"
+                  name="answer"
+                  onChange={event => {
+                    setAnswer(event.target.value);
+                  }}
+                  placeholder="Enter your answer here"
+                  required
+                  type="text"
+                  value={answer}
+                />
+                <Button
+                  busy={status === STATUS.RUNNING}
+                  data-testid="Login"
+                  mb={5}
+                  onClick={handleClickNext}
+                  size="xl"
+                  textTransform="uppercase"
+                  type="submit"
+                  variant="success"
+                >
+                  <Text mr={2}>Next</Text>
+                  <Icon name="check" />
+                </Button>
+              </div>
+            </>
+          )}
         </Container>
       )}
     </Background>
