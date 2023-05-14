@@ -22,7 +22,7 @@ export function* nextStorySaga(): Generator<any, void, any> {
     const data1 = yield call([response1, response1.json]);
     const question = data1.choices[0].message.content as string;
 
-    let title = 'Welcome to our world!';
+    /*     let title = 'Welcome to our world!';
 
     if (messages.length > 2) {
       const response2 = yield call(fetch, 'https://api.openai.com/v1/chat/completions', {
@@ -46,10 +46,10 @@ export function* nextStorySaga(): Generator<any, void, any> {
 
       title = data2.choices[0].message.content as string;
     }
-
+ */
     const formattedQuestion = yield call(() => question.replace(/\n/g, ' <br> '));
 
-    yield put(nextStorySuccess(title, formattedQuestion));
+    yield put(nextStorySuccess(/* title,  */ formattedQuestion));
   } catch (error) {
     console.log(error);
   }

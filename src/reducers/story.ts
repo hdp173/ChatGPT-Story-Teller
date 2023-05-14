@@ -8,7 +8,7 @@ import { StoryState } from 'types';
 
 export const storyState = {
   question: null,
-  title: null,
+  // title: null,
   messages: [
     {
       role: 'system',
@@ -42,10 +42,11 @@ export default {
         draft.status = STATUS.RUNNING;
       })
       .addCase(nextStorySuccess, (draft, { payload }) => {
-        const { question, title } = payload;
+        /* const { question, title } = payload;
 
         draft.title = !title ? null : title;
-        draft.question = !question ? null : question;
+        draft.question = !question ? null : question; */
+        draft.question = !payload ? null : payload;
         draft.status = STATUS.READY;
       });
   }),

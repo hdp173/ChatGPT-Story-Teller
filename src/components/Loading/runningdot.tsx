@@ -8,7 +8,7 @@ const Dot = styled.span`
   border-radius: 50%;
   background-color: #333;
   margin-right: 5px;
-  opacity: 0.4;
+  // opacity: 0.4;
 `;
 
 const bounce = keyframes`

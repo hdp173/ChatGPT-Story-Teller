@@ -10,5 +10,5 @@ export const nextStory = createAction(ActionTypes.STORY_NEXT_REQUEST, (answer?: 
 );
 export const nextStorySuccess = createAction(
   ActionTypes.STORY_NEXT_SUCCESS,
-  (title?: string, question?: string) => actionPayload({ title, question }),
+  (/* title?: string,  */ question?: string) => actionPayload(/* { title, question } */ question),
 );

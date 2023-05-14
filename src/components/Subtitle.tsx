@@ -7,20 +7,20 @@ interface Props {
 }
 
 const Paragraph = styled.div`
-  max-width: 40ch;
-  margin: 2rem 0;
-  font-family: 'Montserrat Medium';
-  font-size: 4rem;
+  max-width: 32ch;
+  margin: 2.5rem auto;
+  font-family: 'Indie Flower';
+  font-size: 3rem;
   font-weight: 900;
-  text-align: center;
-  transform: scale(0.8);
-  animation: scale 10s forwards cubic-bezier(0.5, 1, 0.89, 1);
+  // text-align: center;
+  // transform: scale(0.8);
+  // animation: scale 10s forwards cubic-bezier(0.5, 1, 0.89, 1);
 
-  @keyframes scale {
-    100% {
-      transform: scale(1);
-    }
-  }
+  // @keyframes scale {
+  //   100% {
+  //     transform: scale(1);
+  //   }
+  // }
 `;
 
 const Word = styled.span`

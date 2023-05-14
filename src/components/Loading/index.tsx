@@ -1,9 +1,12 @@
 import React from 'react';
 
-import Magic from './magic';
+import DotRunningLoader from './runningdot';
+
+// import Magic from './magic';
 
 function Loading() {
-  return <Magic />;
+  // return <Magic />;
+  return <DotRunningLoader />;
 }
 
 export default Loading;

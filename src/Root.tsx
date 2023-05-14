@@ -68,6 +68,10 @@ function Root() {
               href="https://fonts.googleapis.com/css2?family=Lemon:wght@400&display=swap"
               rel="stylesheet"
             />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+              rel="stylesheet"
+            />
           </Helmet>
           {isAuthenticated && <Header />}
           <Main isAuthenticated={isAuthenticated}>
