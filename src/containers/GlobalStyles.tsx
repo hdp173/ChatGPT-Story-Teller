@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: Lato, sans-serif;
+    font-family: 'Indie Flower', sans-serif;
     font-size: 16px; /* stylelint-disable unit-disallowed-list */
     margin: 0;
     min-height: 100vh;

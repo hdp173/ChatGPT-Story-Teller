@@ -16,6 +16,7 @@ import Subtitle from 'components/Subtitle';
 import { RootState } from 'types';
 
 const Input = styled.input`
+  font-family: 'Indie Flower';
   font-size: 2.5rem;
   text-align: center;
   letter-spacing: inherit;
