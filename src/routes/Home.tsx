@@ -17,7 +17,7 @@ import { RootState } from 'types';
 
 const Input = styled.input`
   font-family: 'Indie Flower';
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-align: center;
   letter-spacing: inherit;
   color: currentColor;
