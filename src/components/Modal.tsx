@@ -25,7 +25,7 @@ const ModalContent = styled.div`
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
 `;
 
@@ -44,7 +44,7 @@ const ModalButton = styled.button`
   padding: 10px;
   margin-right: 10px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
 
   &:last-child {
