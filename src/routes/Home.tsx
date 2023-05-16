@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Button, Container, Text } from 'styled-minimal';
+
+import { GoogleApiContext } from 'modules/GoogleApiContext';
 
 import { STATUS } from 'literals';
 
@@ -10,6 +12,7 @@ import { clearStory, nextStory } from 'actions';
 import Background from 'components/Background';
 import Icon from 'components/Icon';
 import Loading from 'components/Loading';
+import Modal from 'components/Modal';
 import Subtitle from 'components/Subtitle';
 
 // import Title from 'components/Title';
@@ -45,7 +48,9 @@ function Home() {
   // const [titleDisplayed, setTitleDisplayed] = useState(false);
   const [subtitleDisplayed, setSubtitleDisplayed] = useState(false);
   const [answer, setAnswer] = useState('');
+  const [open, setOpen] = useState(false);
   // const answerRef = useRef(null);
+  const { loaded, tokenClient } = useContext(GoogleApiContext);
 
   // const switchBackground = () => {
   //   setBackgroundImage(`${Math.floor(Math.random() * 5 + 1)}`);
@@ -61,6 +66,29 @@ function Home() {
       // switchBackground();
       dispatch(nextStory(answer));
       setAnswer('');
+    }
+  };
+
+  const handleClickSave = async () => {
+    if (tokenClient == null) {
+      return;
+    }
+
+    (tokenClient as any).callback = async (resp: any) => {
+      if (resp.error !== undefined) {
+        throw resp;
+      }
+
+      setOpen(true);
+    };
+
+    if ((window as any).gapi.client.getToken() === null) {
+      // Prompt the user to select a Google Account and ask for consent to share their data
+      // when establishing a new session.
+      (tokenClient as any).requestAccessToken({ prompt: 'consent' });
+    } else {
+      // Skip display of account chooser and consent dialog for an existing session.
+      (tokenClient as any).requestAccessToken({ prompt: '' });
     }
   };
 
@@ -125,6 +153,20 @@ function Home() {
               <Icon name="bolt" />
             </Button>
             <Button
+              busy={!loaded}
+              data-testid="Save"
+              mr={2}
+              onClick={handleClickSave}
+              size="xl"
+              // style={{ position: 'absolute', right: '80px', bottom: '80px' }}
+              textTransform="uppercase"
+              type="submit"
+              variant="primary"
+            >
+              <Text mr={2}>Save</Text>
+              <Icon name="bell" />
+            </Button>
+            <Button
               busy={status === STATUS.RUNNING}
               data-testid="Login"
               mb={5}
@@ -142,6 +184,7 @@ function Home() {
           )} */}
         </div>
       )}
+      <Modal isOpen={open} onClose={() => setOpen(false)} />
     </Background>
   );
 }
