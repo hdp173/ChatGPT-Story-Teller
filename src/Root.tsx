@@ -62,6 +62,7 @@ function Root() {
 
     script1.src = 'https://apis.google.com/js/api.js';
     script1.async = true;
+    script1.defer = true;
 
     script1.onload = () => {
       // This function will be called when the script is loaded.
@@ -74,6 +75,7 @@ function Root() {
 
     script2.src = 'https://accounts.google.com/gsi/client';
     script2.async = true;
+    script2.defer = true;
 
     script2.onload = () => {
       // This function will be called when the script is loaded.
@@ -113,8 +115,7 @@ function Root() {
   const gisLoaded = useCallback(() => {
     setTokenClient(
       (window as any).google.accounts.oauth2.initTokenClient({
-        client_id:
-          '950917649294-pf4aju5dr33if1pbatvlholdk6i7if8s.apps.googleusercontent.com' /* process.env.REACT_APP_GOOGLE_CLIENT_ID */,
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
         scope: 'https://www.googleapis.com/auth/documents',
         callback: '', // defined later
       }),
