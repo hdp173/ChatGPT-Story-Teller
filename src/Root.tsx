@@ -113,7 +113,8 @@ function Root() {
   const gisLoaded = useCallback(() => {
     setTokenClient(
       (window as any).google.accounts.oauth2.initTokenClient({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        client_id:
+          '950917649294-pf4aju5dr33if1pbatvlholdk6i7if8s.apps.googleusercontent.com' /* process.env.REACT_APP_GOOGLE_CLIENT_ID */,
         scope: 'https://www.googleapis.com/auth/documents',
         callback: '', // defined later
       }),
